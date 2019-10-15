@@ -143,30 +143,10 @@ components:
           type: string
           description: The apartment/suite/unit number of the address associated with the Registration Number (or Pending Registration Status Number) (i.e. “B” from the address “123 Main Street, Apartment B”). Required if a registration_number is provided and the address contains a unit number.
           example: 'B'
-        str_nights_occupied_since_calendar_year_start:
-          type: number
-          example: 42
-          minimum: 0
-          maximum: 366
-          description: The number of nights the rental unit has already been rented as a Short-Term Rental through the Hosting Platform in the calendar year. Required if registration_number is provided.
-        str_nights_booked_until_calendar_year_end:
-          type: number
-          example: 42
-          minimum: 0
-          maximum: 366
-          description: The number of nights the rental unit has been booked for Short-Term Rental stays through the Hosting Platform for the remainder of the calendar year. Required if registration_number is provided.
-        ltr_nights_occupied_since_calendar_year_start:
-          type: number
-          example: 42
-          minimum: 0
-          maximum: 366
-          description: The number of nights the rental unit has already been rented for non-Short-Term Rental stays through the Hosting Platform in the calendar year. Required if registration_number is provided.
-        ltr_nights_booked_until_calendar_year_end:
-          type: number
-          example: 42
-          minimum: 0
-          maximum: 366
-          description: The number of nights the rental unit has been booked for non-Short-Term Rental stays through the Hosting Platform for the remainder of the calendar year. Required if registration_number is provided.
+        booking_information:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingInformation'
         unique_host_id:
           type: string
           description: As presented in the metadata of each Host Profile and/or Listing on the publicly facing website(s) of the Hosting Platform including any affiliate websites, if applicable. Required if registration_number is not provided.
@@ -186,15 +166,64 @@ components:
       properties:
         listing_id:
           type: string
+          example: my-listing-id
         registration_number_is_valid:
           type: boolean
+          example: true
         exemption_code_is_valid:
           type: boolean
-        future_bookings_are_allowed:
+        booking_eligibility:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingEligibility'
+    BookingEligibility:
+      type: object
+      properties:
+        start_date:
+          type: string
+          format: date
+          description: Start date of eligibility period (inclusive)
+          example: '2019-01-01'
+        end_date:
+          type: string
+          format: date
+          description: End date of eligibility period (exclusive)
+          example: '2020-01-01'
+        str_bookings_allowed:
           type: boolean
-        remaining_nights_available_for_booking:
-          type: number
-      description: An object returned by API successful response
+          description: Identifies if a given listing is eligible to book
+          example: true
+        str_remaining_nights_available_for_booking:
+          type: integer
+          description: Remaining nights available for booking
+          example: 15
+    BookingInformation:
+      type: object
+      description: Required if registration_number is provided.
+      properties:
+        start_date:
+          type: string
+          format: date
+          description: Start date of eligibility period (inclusive)
+          example: '2019-01-01'
+        end_date:
+          type: string
+          format: date
+          description: End date of eligibility period (exclusive)
+          example: '2019-10-01'
+        str_nights_booked:
+          type: integer
+          description: The number of nights the rental unit has been or will be rented within date range, as a Short-Term Rental through the Hosting Platform.
+          example: 33
+        ltr_nights_booked:
+          type: integer
+          description: The number of nights the rental unit has already been rented within date range for non-Short-Term Rental stays through the Hosting Platform in the calendar year.
+          example: 0
+      required:
+        - start_date
+        - end_date
+        - str_nights_booked
+        - ltr_nights_booked
     GenericErrorMessage:
       type: object
       properties:
