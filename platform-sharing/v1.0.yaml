@@ -145,16 +145,20 @@ components:
           example: 'B'
         booking_information:
           type: array
+          description: This array must be populated for the following time periods only if a registration_number is provided
+            - January 1 of the current year through the current day
+            - The current day through January 1 of next calendar year
+            - January 1 of the next calendar year through January 1 of the following year
           items:
             $ref: '#/components/schemas/BookingInformation'
         unique_host_id:
           type: string
-          description: As presented in the metadata of each Host Profile and/or Listing on the publicly facing website(s) of the Hosting Platform including any affiliate websites, if applicable. Required if registration_number is not provided.
+          description: As presented in the metadata of each Host Profile and/or Listing on the publicly facing website(s) of the Hosting Platform including any affiliate websites, if applicable. Required if exemption code 02, 03, 04 are provided. 
           example: HOST12345
         host_email_address:
           type: string
           format: email
-          description: The email address of the Host as provided to the Hosting Platform by the Host. Required if registration_number is not provided.
+          description: The email address of the Host as provided to the Hosting Platform by the Host. Required if exemption code 02, 03, 04 are provided.
           example: str_host@example.com
         situs_address:
           $ref: '#/components/schemas/SitusAddress'
@@ -167,11 +171,29 @@ components:
         listing_id:
           type: string
           example: my-listing-id
-        registration_number_is_valid:
-          type: boolean
-          example: true
-        exemption_code_is_valid:
-          type: boolean
+        registration_number:
+          type: string
+          description: The Registration Number or Pending Registration Status Number.
+          example: STR-12345
+        listing_ineligibility_reason:
+          type: string
+          enum:
+            - invalid_registration_number
+            - expired_registration
+            - application_denied
+            - revoked_or_suspended_registration
+            - exemption_status_code_invalid
+            - exceeded_booking_cap
+            - other
+          description: >
+            Reason why a listing has been determined inelgibile. If null, listing is eligible:
+              * `invalid_registration_number` - The listing lacks a valid City Registration Number
+              * `expired_registration` - The listing has an expired registration
+              * `application_denied` - The listing has had its pending registration application denied
+              * `revoked_or_suspended` - The listing has had its registration revoked or suspended
+              * `exemption_status_code_invalid` - The City determines that the exemption status code is invalid
+              * `exceeded_booking_cap` - The Host has exceeded the 120 day cap
+              * `other` - Other reason for ineligibility
         booking_eligibility:
           type: array
           items:
@@ -189,9 +211,10 @@ components:
           format: date
           description: End date of eligibility period (exclusive)
           example: '2020-01-01'
-        str_bookings_allowed:
-          type: boolean
-          description: Identifies if a given listing is eligible to book
+        str_bookings_allowed_through:
+          type: string
+          format: date
+          description: If given, provides the last date that bookings are allowed. If null, all future bookings are allowed.
           example: true
         str_remaining_nights_available_for_booking:
           type: integer
@@ -210,7 +233,7 @@ components:
           type: string
           format: date
           description: End date of eligibility period (exclusive)
-          example: '2019-10-01'
+          example: '2019-11-01'
         str_nights_booked:
           type: integer
           description: The number of nights the rental unit has been or will be rented within date range, as a Short-Term Rental through the Hosting Platform.
