@@ -8,5 +8,5 @@ Provides an API for Short Term Rental platforms to verify with the City of Los A
 
 To learn more about the City's short term rental program, please view the [DCP Home Sharing Ordinance](https://planning.lacity.org/ordinances/docs/HomeSharing/adopted/FAQ.pdf). 
 
-For any questions about this repo, email Matt ?? 
+For any questions about this repo, email [Matthew Glesne](mailto://matthew.glesne@lacity.org)
 
