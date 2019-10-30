@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Platform sharing
-  version: '1.0'
+  version: '0.1'
   contact:
     name: Host Compliance
   description: 'Host Compliance API for platform sharing agreement. *Authorization:* Endpoints which require authentication will require an OAuth2 Bearer Token header: `Authorization: Bearer {token}`.'
@@ -13,7 +13,7 @@ servers:
 paths:
   '/{jurisdiction-slug}/listings':
     post:
-      summary: Add multiple listings to the Host Compliance system
+      summary: Validate listings within the Host Compliance system
       requestBody:
         content:
           application/json:
