@@ -145,10 +145,11 @@ components:
           example: 'B'
         booking_information:
           type: array
-          description: This array must be populated for the following time periods only if a registration_number is provided
+          description: |
+            This array must be populated for the following time periods only if a registration_number is provided
             - January 1 of the current year through the current day
             - The current day through January 1 of next calendar year
-            - January 1 of the next calendar year through January 1 of the following year
+            - January 1 of the next calendar year through January 1 of the following year _This date range is only required for Appendix A_
           items:
             $ref: '#/components/schemas/BookingInformation'
         unique_host_id:
@@ -240,13 +241,14 @@ components:
           example: 33
         ltr_nights_booked:
           type: integer
-          description: The number of nights the rental unit has already been rented within date range for non-Short-Term Rental stays through the Hosting Platform in the calendar year.
+          description: |
+            The number of nights the rental unit has already been rented within date range for non-Short-Term Rental stays through the Hosting Platform in the calendar year.
+            > This field is only required for Appendix A.
           example: 0
       required:
         - start_date
         - end_date
         - str_nights_booked
-        - ltr_nights_booked
     GenericErrorMessage:
       type: object
       properties:
