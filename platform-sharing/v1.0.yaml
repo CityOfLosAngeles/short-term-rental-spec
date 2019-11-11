@@ -50,7 +50,7 @@ paths:
               examples:
                 example-1:
                   value:
-                    message: Can not process more than 100 records in one request. Please reduce the number of listings to 100 or less.
+                    message: Cannot process more than 100 records in one request. Please reduce the number of listings to 100 or less.
         '422':
           description: Unprocessable Entity
           content:
@@ -65,6 +65,16 @@ paths:
                       '0':
                         host_email_address:
                           - Not a valid email address
+        '429':
+          description: Too many requests sent, please limit requests to one per second.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericErrorMessage'
+              examples:
+                example-1:
+                  value:
+                    message: Cannot process more than one request per second. Please try again later.
       description: Share STR information with Host Compliance
     parameters:
       - schema:
