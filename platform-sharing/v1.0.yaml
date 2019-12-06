@@ -88,7 +88,7 @@ components:
   schemas:
     SitusAddress:
       type: object
-      description: The complete physical address of the rental unit as provided to the Hosting Platform by the Host. Required if registration_number is not provided.
+      description: The complete physical address of the rental unit as provided to the Hosting Platform by the Host. Required for exemption code "02", "03", and "04" only.
       properties:
         street_address:
           type: string
