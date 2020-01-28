@@ -132,13 +132,13 @@ components:
             description: The Listing URL(s) (i.e. the website address(es) presented in the exact same format(s) as used on the publicly facing website(s) of the Hosting Platform including any affiliate websites)
         registration_number:
           type: string
-          description: The Registration Number or Pending Registration Status Number. Required if exemption_code not provided.
+          description: The Registration Number or Pending Registration Status Number.
           example: STR-12345
         exemption_code:
           type: string
           enum: ["01", "02", "03", "04"]
           description: >
-            An exemption status code that explains why the property is not considered a Short-Term Rental subject to the provisions of the Home-Sharing Ordinance. Required if registration_number is not provided. Allowed values:
+            An exemption status code that explains why the property is not considered a Short-Term Rental subject to the provisions of the Home-Sharing Ordinance. Allowed values:
 
               * `01` - a residential property advertised and rented exclusively for stays longer than 30 consecutive days. For the avoidance of doubt, this exemption code can only apply to Listings for which the Hosting Platform is actively preventing bookings for 29 days or less.
               * `02` - a Hotel or Motel
@@ -198,7 +198,7 @@ components:
             - other
           description: >
             Reason why a listing has been determined inelgibile. If null, listing is eligible:
-              * `invalid_registration_number` - The listing lacks a valid City Registration Number
+              * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
               * `expired_registration` - The listing has an expired registration
               * `application_denied` - The listing has had its pending registration application denied
               * `revoked_or_suspended` - The listing has had its registration revoked or suspended
