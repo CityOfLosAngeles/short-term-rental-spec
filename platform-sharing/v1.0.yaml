@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Platform sharing
-  version: '0.1'
+  version: '1.1'
   contact:
     name: Host Compliance
   description: 'Host Compliance API for platform sharing agreement. *Authorization:* Endpoints which require authentication will require an OAuth2 Bearer Token header: `Authorization: Bearer {token}`.'
@@ -186,25 +186,6 @@ components:
           type: string
           description: The Registration Number or Pending Registration Status Number.
           example: STR-12345
-        listing_ineligibility_reason:
-          type: string
-          enum:
-            - invalid_registration_number
-            - expired_registration
-            - application_denied
-            - revoked_or_suspended_registration
-            - exemption_status_code_invalid
-            - exceeded_booking_cap
-            - other
-          description: >
-            Reason why a listing has been determined inelgibile. If null, listing is eligible:
-              * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
-              * `expired_registration` - The listing has an expired registration
-              * `application_denied` - The listing has had its pending registration application denied
-              * `revoked_or_suspended` - The listing has had its registration revoked or suspended
-              * `exemption_status_code_invalid` - The City determines that the exemption status code is invalid
-              * `exceeded_booking_cap` - The Host has exceeded the 120 day cap
-              * `other` - Other reason for ineligibility
         booking_eligibility:
           type: array
           items:
@@ -231,6 +212,25 @@ components:
           type: integer
           description: Remaining nights available for booking
           example: 15
+        listing_ineligibility_reason:
+          type: string
+          enum:
+            - invalid_registration_number
+            - expired_registration
+            - application_denied
+            - revoked_or_suspended_registration
+            - exemption_status_code_invalid
+            - exceeded_booking_cap
+            - other
+          description: >
+            Reason why a listing has been determined inelgibile. If null, listing is eligible:
+              * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
+              * `expired_registration` - The listing has an expired registration
+              * `application_denied` - The listing has had its pending registration application denied
+              * `revoked_or_suspended` - The listing has had its registration revoked or suspended
+              * `exemption_status_code_invalid` - The City determines that the exemption status code is invalid
+              * `exceeded_booking_cap` - The Host has exceeded the 120 day cap
+              * `other` - Other reason for ineligibility
     BookingInformation:
       type: object
       description: Required if registration_number is provided.
