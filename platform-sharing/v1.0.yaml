@@ -186,6 +186,13 @@ components:
           type: string
           description: The Registration Number or Pending Registration Status Number.
           example: STR-12345
+        expected_actions:
+          type: string
+          enum:
+            - disallow_str_bookings
+            - cancel_future_bookings
+          description: >
+            Expected actions for the given listing based on booking information received
         booking_eligibility:
           type: array
           items:
@@ -212,7 +219,7 @@ components:
           type: integer
           description: Remaining nights available for booking
           example: 15
-        listing_ineligibility_reason:
+        eligibility_status:
           type: string
           enum:
             - invalid_registration_number
@@ -221,9 +228,11 @@ components:
             - revoked_or_suspended_registration
             - exemption_status_code_invalid
             - exceeded_booking_cap
+            - str_allowed
             - other
           description: >
-            Reason why a listing has been determined inelgibile. If null, listing is eligible:
+            Eligibility status for a given time period
+              * `str_allowed` - Short term rentals are allowed on this listing
               * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
               * `expired_registration` - The listing has an expired registration
               * `application_denied` - The listing has had its pending registration application denied
