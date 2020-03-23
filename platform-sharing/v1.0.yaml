@@ -186,13 +186,6 @@ components:
           type: string
           description: The Registration Number or Pending Registration Status Number.
           example: STR-12345
-        expected_actions:
-          type: string
-          enum:
-            - disallow_str_bookings
-            - cancel_future_bookings
-          description: >
-            Expected actions for the given listing based on booking information received
         booking_eligibility:
           type: array
           items:
