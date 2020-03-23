@@ -186,6 +186,12 @@ components:
           type: string
           description: The Registration Number or Pending Registration Status Number.
           example: STR-12345
+        registration_type:
+          type: string
+          description: Type of registration
+          enum:
+            - regular
+            - extended
         booking_eligibility:
           type: array
           items:
