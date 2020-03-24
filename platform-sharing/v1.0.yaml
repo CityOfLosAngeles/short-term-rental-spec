@@ -192,6 +192,9 @@ components:
           enum:
             - regular
             - extended
+        registration_night_cap:
+          type: integer
+          description: Night booked cap based on local laws
         booking_eligibility:
           type: array
           items:
