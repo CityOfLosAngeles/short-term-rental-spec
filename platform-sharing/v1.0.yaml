@@ -219,8 +219,8 @@ components:
           example: true
         str_remaining_nights_available_for_booking:
           type: integer
-          description: Remaining nights available for booking
-          example: 15
+          description: Remaining nights available for booking. Negative values indicate the number of nights by which the registration has exceeded its cap.
+          example: 366
         eligibility_status:
           type: string
           enum:
