@@ -199,6 +199,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BookingEligibility'
+        eligibility_status:
+          type: string
+          enum:
+            - invalid_registration_number
+            - expired_registration
+            - application_denied
+            - revoked_or_suspended_registration
+            - exemption_status_code_invalid
+            - exceeded_booking_cap
+            - str_allowed
+            - other
+          description: >
+            Eligibility status for a given time period
+              * `str_allowed` - Short term rentals are allowed on this listing
+              * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
+              * `expired_registration` - The listing has an expired registration
+              * `application_denied` - The listing has had its pending registration application denied
+              * `revoked_or_suspended` - The listing has had its registration revoked or suspended
+              * `exemption_status_code_invalid` - The City determines that the exemption status code is invalid
+              * `exceeded_booking_cap` - The Host has exceeded the 120 day cap
+              * `other` - Other reason for ineligibility
     BookingEligibility:
       type: object
       properties:
@@ -221,27 +242,6 @@ components:
           type: integer
           description: Remaining nights available for booking. Negative values indicate the number of nights by which the registration has exceeded its cap.
           example: 366
-        eligibility_status:
-          type: string
-          enum:
-            - invalid_registration_number
-            - expired_registration
-            - application_denied
-            - revoked_or_suspended_registration
-            - exemption_status_code_invalid
-            - exceeded_booking_cap
-            - str_allowed
-            - other
-          description: >
-            Eligibility status for a given time period
-              * `str_allowed` - Short term rentals are allowed on this listing
-              * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
-              * `expired_registration` - The listing has an expired registration
-              * `application_denied` - The listing has had its pending registration application denied
-              * `revoked_or_suspended` - The listing has had its registration revoked or suspended
-              * `exemption_status_code_invalid` - The City determines that the exemption status code is invalid
-              * `exceeded_booking_cap` - The Host has exceeded the 120 day cap
-              * `other` - Other reason for ineligibility
     BookingInformation:
       type: object
       description: Required if registration_number is provided.
