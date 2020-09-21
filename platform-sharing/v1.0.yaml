@@ -217,7 +217,6 @@ components:
             Eligibility status for a given time period
               * `str_allowed` - Short term rentals are allowed on this listing
               * `invalid_registration_number` - The listing lacks a valid City Registration Number or is not provided
-              * `invalid_address_for_registration` - The address on the City Registration Number does not pass address validation
               * `expired_registration` - The listing has an expired registration
               * `application_denied` - The listing has had its pending registration application denied
               * `revoked_or_suspended` - The listing has had its registration revoked or suspended
