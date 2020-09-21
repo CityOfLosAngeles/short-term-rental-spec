@@ -199,11 +199,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BookingEligibility'
+        eligibility_reason:
+          type: string
+          description: Optional reason explaining the status provided
         eligibility_status:
           type: string
           enum:
             - invalid_registration_number
-            - invalid_address_for_registration
             - expired_registration
             - application_denied
             - revoked_or_suspended_registration
