@@ -206,6 +206,7 @@ components:
           type: string
           enum:
             - invalid_registration_number
+            - exempt
             - expired_registration
             - application_denied
             - revoked_or_suspended_registration
@@ -222,6 +223,7 @@ components:
               * `revoked_or_suspended` - The listing has had its registration revoked or suspended
               * `exemption_status_code_invalid` - The City determines that the exemption status code is invalid
               * `exceeded_booking_cap` - The Host has exceeded the 120 day cap
+              * `exempt` - The listing is exempt from str policy
               * `other` - Other reason for ineligibility
     BookingEligibility:
       type: object
