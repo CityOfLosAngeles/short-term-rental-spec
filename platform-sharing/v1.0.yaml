@@ -199,6 +199,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BookingEligibility'
+        eligibility_reason:
+          type: string
+          description: Optional reason explaining the status provided
         eligibility_status:
           type: string
           enum:
@@ -299,10 +302,3 @@ components:
                     description: Field name of the input array
                     items:
                       type: string
-  securitySchemes:
-    Bearer token:
-      type: oauth2
-      flows:
-        implicit:
-          scopes: []
-          authorizationUrl: 'https://hostcompliance.auth0.com/authorize?grant_type=token&audience=https%3A//api.hostcompliance.com'
